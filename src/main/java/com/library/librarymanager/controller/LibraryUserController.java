@@ -41,4 +41,9 @@ public class LibraryUserController {
                 .toUri();
         return ResponseEntity.created(locationOfNewLibraryUser).build();
     }
+
+    @GetMapping()
+    private ResponseEntity<Iterable<LibraryUser>> getAllLibraryUsers(){
+        return ResponseEntity.ok(libraryUserRepository.findAll());
+    }
 }

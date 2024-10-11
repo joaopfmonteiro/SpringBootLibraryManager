@@ -10,6 +10,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.net.URI;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -40,4 +42,20 @@ public class LibraryUserControllerTest {
         assertThat(libraryUserResponseEntity.getStatusCode())
                 .isEqualTo(HttpStatus.NOT_FOUND);
     }
+
+    @Test
+    void shouldCreateANewLibraryUser(){
+        LibraryUser newLibraryUser = new LibraryUser(null,"Pedro");
+        ResponseEntity<Void> createLibraryUser = restTemplate
+                .postForEntity("/libraryUser", newLibraryUser, Void.class);
+        assertThat(createLibraryUser.getStatusCode())
+                .isEqualTo(HttpStatus.CREATED);
+
+        URI locationOfNewLibraryUser =
+                createLibraryUser.getHeaders().getLocation();
+        ResponseEntity<String> getLibraryUserResponse = restTemplate.getForEntity(locationOfNewLibraryUser, String.class);
+        assertThat(getLibraryUserResponse.getStatusCode())
+                .isEqualTo(HttpStatus.OK);
+    }
+
 }

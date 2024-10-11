@@ -4,11 +4,10 @@ import com.library.librarymanager.LibraryUser;
 import com.library.librarymanager.repository.LibraryUserRepository;
 import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -30,5 +29,16 @@ public class LibraryUserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping()
+    private ResponseEntity<Void> createLibraryUser(@RequestBody LibraryUser newLibraryUser, UriComponentsBuilder uriBuilder){
+
+        LibraryUser libraryUser = libraryUserRepository.save(newLibraryUser);
+        URI locationOfNewLibraryUser = uriBuilder
+                .path("/libraryUser/{id}")
+                .buildAndExpand(libraryUser.id())
+                .toUri();
+        return ResponseEntity.created(locationOfNewLibraryUser).build();
     }
 }

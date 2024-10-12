@@ -1,7 +1,6 @@
 package com.library.librarymanager.controller;
 
-import com.library.librarymanager.Book;
-import com.library.librarymanager.LibraryUser;
+import com.library.librarymanager.model.Book;
 import com.library.librarymanager.repository.BookRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

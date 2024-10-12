@@ -1,5 +1,6 @@
 package com.library.librarymanager;
 
+import com.library.librarymanager.model.LibraryUser;
 import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,6 @@ import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

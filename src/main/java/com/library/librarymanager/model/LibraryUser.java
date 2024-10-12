@@ -1,4 +1,4 @@
-package com.library.librarymanager;
+package com.library.librarymanager.model;
 
 import org.springframework.data.annotation.Id;
 

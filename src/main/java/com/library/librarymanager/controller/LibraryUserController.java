@@ -1,8 +1,7 @@
 package com.library.librarymanager.controller;
 
-import com.library.librarymanager.LibraryUser;
+import com.library.librarymanager.model.LibraryUser;
 import com.library.librarymanager.repository.LibraryUserRepository;
-import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;

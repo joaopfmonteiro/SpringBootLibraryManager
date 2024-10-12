@@ -2,7 +2,7 @@ package com.library.librarymanager.controllerTest;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
-import com.library.librarymanager.LibraryUser;
+import com.library.librarymanager.model.LibraryUser;
 import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

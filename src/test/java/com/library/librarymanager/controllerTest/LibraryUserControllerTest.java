@@ -3,6 +3,7 @@ package com.library.librarymanager.controllerTest;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.library.librarymanager.model.LibraryUser;
+import com.library.librarymanager.model.enums.Role;
 import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,10 @@ public class LibraryUserControllerTest {
         DocumentContext documentContext = JsonPath.parse(libraryUserResponseEntity.getBody());
         Number id = documentContext.read("$.id");
         String userName = documentContext.read("$.userName");
+        String userRole = documentContext.read("$.userRole");
         assertThat(id).isEqualTo(2);
         assertThat(userName).isEqualTo("Joao");
-//        assertThat(libraryUserResponseEntity.getBody()).isEqualTo()
+        assertThat(userRole).isEqualTo("EMPLOYEE");
     }
 
     @Test
@@ -48,7 +50,7 @@ public class LibraryUserControllerTest {
     @DirtiesContext
     @Test
     void shouldCreateANewLibraryUser(){
-        LibraryUser newLibraryUser = new LibraryUser(null,"Pedro");
+        LibraryUser newLibraryUser = new LibraryUser(null,"Pedro", Role.EMPLOYEE);
         ResponseEntity<Void> createLibraryUser = restTemplate
                 .postForEntity("/libraryUser", newLibraryUser, Void.class);
         assertThat(createLibraryUser.getStatusCode())

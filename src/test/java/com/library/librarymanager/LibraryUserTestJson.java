@@ -11,6 +11,8 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 
+import static com.library.librarymanager.model.enums.Role.CUSTOMER;
+import static com.library.librarymanager.model.enums.Role.EMPLOYEE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JsonTest
@@ -26,19 +28,21 @@ public class LibraryUserTestJson {
     @BeforeEach
     void setUp(){
         libraryUsers = Arrays.array(
-            new LibraryUser(3L,"Marco"),
-            new LibraryUser(4L,"Marta"),
-            new LibraryUser(5L,"Carolina"));
+            new LibraryUser(3L,"Marco", EMPLOYEE),
+            new LibraryUser(4L,"Marta", EMPLOYEE),
+            new LibraryUser(5L,"Carolina", CUSTOMER));
     }
 
     @Test
     void libraryUserSerializationTest() throws IOException {
-        LibraryUser libraryUser = new LibraryUser(2L, "Joao");
+        LibraryUser libraryUser = new LibraryUser(2L, "Joao", EMPLOYEE);
         assertThat(json.write(libraryUser)).isStrictlyEqualToJson(new ClassPathResource("singleLibraryUser.json"));
         assertThat(json.write(libraryUser)).hasJsonPath("@.id");
         assertThat(json.write(libraryUser)).hasJsonPath("@.userName");
+        assertThat(json.write(libraryUser)).hasJsonPath("@.userRole");
         assertThat(json.write(libraryUser)).extractingJsonPathNumberValue("@.id").isEqualTo(2);
         assertThat(json.write(libraryUser)).extractingJsonPathStringValue("@.userName").isEqualTo("Joao");
+        assertThat(json.write(libraryUser)).extractingJsonPathStringValue("@.userRole").isEqualTo("EMPLOYEE");
     }
 
     @Test
@@ -46,12 +50,14 @@ public class LibraryUserTestJson {
         String libraryUserExpected = """
                 {
                     "id": 2,
-                    "userName": "Joao"
+                    "userName": "Joao",
+                    "userRole": "EMPLOYEE"
                 }
                 """;
-        assertThat(json.parse(libraryUserExpected)).isEqualTo(new LibraryUser(2L, "Joao"));
+        assertThat(json.parse(libraryUserExpected)).isEqualTo(new LibraryUser(2L, "Joao",EMPLOYEE));
         assertThat(json.parseObject(libraryUserExpected).id()).isEqualTo(2L);
         assertThat(json.parseObject(libraryUserExpected).userName()).isEqualTo("Joao");
+        assertThat(json.parseObject(libraryUserExpected).userRole()).isEqualTo(EMPLOYEE);
     }
 
     @Test

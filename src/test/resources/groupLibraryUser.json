@@ -1,14 +1,19 @@
 [
   {
     "id": 3,
-    "userName": "Marco"
+    "userName": "Marco",
+    "userRole": "EMPLOYEE"
   },
   {
-  "id": 4,
-  "userName": "Marta"
+    "id": 4,
+    "userName": "Marta",
+    "userRole": "EMPLOYEE"
+
   },
   {
-  "id": 5,
-  "userName": "Carolina"
+    "id": 5,
+    "userName": "Carolina",
+    "userRole": "CUSTOMER"
+
   }
 ]

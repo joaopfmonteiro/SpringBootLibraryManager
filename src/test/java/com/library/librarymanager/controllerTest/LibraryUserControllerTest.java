@@ -80,6 +80,9 @@ public class LibraryUserControllerTest {
 
         JSONArray userNames = documentContext.read("$..userName");
         assertThat(userNames).containsExactlyInAnyOrder("Joao", "Pedro", "Marta");
+
+        JSONArray userRole = documentContext.read(("$..userRole"));
+        assertThat(userRole).containsExactlyInAnyOrder("EMPLOYEE", "EMPLOYEE", "CUSTOMER");
     }
 
 }

@@ -2,7 +2,7 @@ package com.library.librarymanager.controllerTest;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
-import com.library.librarymanager.model.LibraryUser;
+import com.library.librarymanager.model.LibraryUserDTO;
 import com.library.librarymanager.model.enums.Role;
 import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import java.net.URI;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class LibraryUserControllerTest {
+public class LibraryUserDTOControllerTest {
 
     @Autowired
     TestRestTemplate restTemplate;
@@ -50,9 +50,9 @@ public class LibraryUserControllerTest {
     @DirtiesContext
     @Test
     void shouldCreateANewLibraryUser(){
-        LibraryUser newLibraryUser = new LibraryUser(null,"Pedro", Role.EMPLOYEE);
+        LibraryUserDTO newLibraryUserDTO = new LibraryUserDTO(null,"Pedro", Role.EMPLOYEE);
         ResponseEntity<Void> createLibraryUser = restTemplate
-                .postForEntity("/libraryUser", newLibraryUser, Void.class);
+                .postForEntity("/libraryUser", newLibraryUserDTO, Void.class);
         assertThat(createLibraryUser.getStatusCode())
                 .isEqualTo(HttpStatus.CREATED);
 

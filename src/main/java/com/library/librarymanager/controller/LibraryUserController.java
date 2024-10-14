@@ -1,6 +1,6 @@
 package com.library.librarymanager.controller;
 
-import com.library.librarymanager.model.LibraryUser;
+import com.library.librarymanager.model.LibraryUserDTO;
 import com.library.librarymanager.repository.LibraryUserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +20,9 @@ public class LibraryUserController {
     }
 
     @GetMapping("/{requestedId}")
-    private ResponseEntity<LibraryUser> findById(@PathVariable Long requestedId){
+    private ResponseEntity<LibraryUserDTO> findById(@PathVariable Long requestedId){
 
-        Optional<LibraryUser> optionalLibraryUser = libraryUserRepository.findById(requestedId);
+        Optional<LibraryUserDTO> optionalLibraryUser = libraryUserRepository.findById(requestedId);
         if(optionalLibraryUser.isPresent()){
             return ResponseEntity.ok(optionalLibraryUser.get());
         } else {
@@ -31,18 +31,18 @@ public class LibraryUserController {
     }
 
     @PostMapping()
-    private ResponseEntity<Void> createLibraryUser(@RequestBody LibraryUser newLibraryUser, UriComponentsBuilder uriBuilder){
+    private ResponseEntity<Void> createLibraryUser(@RequestBody LibraryUserDTO newLibraryUserDTO, UriComponentsBuilder uriBuilder){
 
-        LibraryUser libraryUser = libraryUserRepository.save(newLibraryUser);
+        LibraryUserDTO libraryUserDTO = libraryUserRepository.save(newLibraryUserDTO);
         URI locationOfNewLibraryUser = uriBuilder
                 .path("/libraryUser/{id}")
-                .buildAndExpand(libraryUser.id())
+                .buildAndExpand(libraryUserDTO.id())
                 .toUri();
         return ResponseEntity.created(locationOfNewLibraryUser).build();
     }
 
     @GetMapping()
-    private ResponseEntity<Iterable<LibraryUser>> getAllLibraryUsers(){
+    private ResponseEntity<Iterable<LibraryUserDTO>> getAllLibraryUsers(){
         return ResponseEntity.ok(libraryUserRepository.findAll());
     }
 }

@@ -1,6 +1,6 @@
 package com.library.librarymanager.controller;
 
-import com.library.librarymanager.model.Book;
+import com.library.librarymanager.model.BookDTO;
 import com.library.librarymanager.repository.BookRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +21,8 @@ public class BookController {
     }
 
     @GetMapping("{requestId}")
-    private ResponseEntity<Book> findById(@PathVariable Long requestId){
-        Optional<Book> book = bookRepository.findById(requestId);
+    private ResponseEntity<BookDTO> findById(@PathVariable Long requestId){
+        Optional<BookDTO> book = bookRepository.findById(requestId);
         if(book.isPresent()){
             return ResponseEntity.ok(book.get());
         } else {

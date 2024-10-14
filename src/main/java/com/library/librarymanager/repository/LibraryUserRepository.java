@@ -1,7 +1,7 @@
 package com.library.librarymanager.repository;
 
-import com.library.librarymanager.model.LibraryUser;
+import com.library.librarymanager.model.LibraryUserDTO;
 import org.springframework.data.repository.CrudRepository;
 
-public interface LibraryUserRepository extends CrudRepository <LibraryUser, Long> {
+public interface LibraryUserRepository extends CrudRepository <LibraryUserDTO, Long> {
 }
